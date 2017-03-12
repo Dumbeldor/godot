@@ -70,6 +70,7 @@ protected:
 	virtual bool has_point(const Point2 &p_point) const;
 	void _notification(int p_what);
 	static void _bind_methods();
+	Panel *panel = NULL;
 
 public:
 	TextureButton *get_close_button();

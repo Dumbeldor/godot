@@ -33,6 +33,12 @@
 
 void WindowDialog::_post_popup() {
 
+	panel = memnew(Panel);
+	panel->set_pos(Point2(0, 0));
+	panel->set_size(get_parent_area_size());
+	//panel->set_opacity(0.7);
+	get_parent()->add_child(panel);
+
 	drag_type = DRAG_NONE; // just in case
 }
 
@@ -206,6 +212,7 @@ void WindowDialog::_closed() {
 
 	_close_pressed();
 	hide();
+	get_parent()->remove_child(panel);
 }
 
 int WindowDialog::_drag_hit_test(const Point2 &pos) const {
@@ -336,10 +343,12 @@ void AcceptDialog::_ok_pressed() {
 		hide();
 	ok_pressed();
 	emit_signal("confirmed");
+	get_parent()->remove_child(panel);
 }
 void AcceptDialog::_close_pressed() {
 
 	cancel_pressed();
+	get_parent()->remove_child(panel);
 }
 
 String AcceptDialog::get_text() const {
